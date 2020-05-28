@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create subtask</title>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><a href="/task" th:text="#{home}"></a></li>
+    <li><a href="/task/new" th:text="#{create_task}"></a></li>
+</ul>
+<h2 th:text="#{create_subtask}"></h2>
+<form method="post" action="/task/new/subtask" th:object="${subtask}">
+    <div>
+        <input type="hidden" th:field="*{IDTask}">
+    </div>
+    <div>
+        <label for="title" th:text="#{title}">Title:</label>
+        <input id="title" type="text" th:field="*{title}">
+        <p th:errors="*{title}"></p>
+    </div>
+    <div>
+        <label for="details" th:text="#{description}"></label>
+        <input id="details" type="text" th:field="*{details}">
+        <p th:errors="*{details}"></p>
+    </div>
+    <input type="submit" th:value="#{create_subtask}">
+</form>
+</body>
+</html>

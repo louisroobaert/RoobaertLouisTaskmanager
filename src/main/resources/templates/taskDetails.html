@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task listing</title>
+    <style>
+        .list{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .li{
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+<ul class="list">
+    <li class="li" ><a href="/task" th:text="#{home}"></a></li>
+    <li class="li"><a href="/task/new" th:text="#{create_task}"></a></li>
+</ul>
+<h2 th:text="#{tasks}"></h2>
+<table>
+    <thead>
+    <tr>
+        <th th:text="#{title}"></th>
+        <th th:text="#{details}"></th>
+        <th th:text="#{date}"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="t : ${task}">
+        <td th:text="*{task.title}"></td>
+        <td th:text="*{task.details}"></td>
+        <td th:text="*{task.date}"></td>
+    </tr>
+    </tbody>
+</table>
+<h3 th:text="#{subtasks}"></h3>
+<ul th:each="subtask : *{task.getSubTasks()}">
+    <li th:text="*{subtask.title}"></li>
+    <li th:text="*{subtask.details}"></li>
+</ul>
+
+</body>
+</html>

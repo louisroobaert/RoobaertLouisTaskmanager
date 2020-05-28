@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{create_task}"></title>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><a href="/task" th:text="#{home}"></a></li>
+    <li><a href="/task/new" th:text="#{create_task}"></a></li>
+</ul>
+<h2 th:text="#{create_task}"></h2>
+<form method="post" action="/task/edit" th:object="${task}">
+    <p th:text="${#fields.globalErrors()}"></p>
+    <div>
+        <input type="hidden" th:field="*{id}">
+        <p th:errors="*{title}"></p>
+    </div>
+    <div>
+        <label for="title" th:text="#{title}"></label>
+        <input id="title" type="text"  th:field="*{title}">
+        <p th:errors="*{title}"></p>
+    </div>
+    <div>
+        <label for="details" th:text="#{description}"></label>
+        <input id="details" type="text" th:field="*{details}">
+        <p th:errors="*{details}"></p>
+    </div>
+    <div>
+        <label for="dateAndTime" th:text="#{date_time_task}"></label>
+        <input id="dateAndTime" type="datetime-local" th:field="*{date}">
+    </div>
+    <input type="submit" th:value="#{edit_task}">
+</form>
+</body>
+</html>
